@@ -11,6 +11,8 @@ np.set_printoptions(linewidth = 200)
 # # Watch all created variables
 # dir()
 
+############################
+
 # ===== To use SymPy ===== #
 from sympy import *
 # Deg-Rad transform functions
@@ -39,12 +41,16 @@ E.evalf()
 pi.evalf()
 # Simplify a expression
 simplify(expression)
+# Factoring a expression
+factor(expression)
+# Expand a expression
+expand(expression)
 # Sientific expression
 #2e-2 = 0.02
 #2e-3 = 0.002
 
 
-#################################################################
+############################
 
 # ===== To use NumPy ===== #
 import numpy as np
