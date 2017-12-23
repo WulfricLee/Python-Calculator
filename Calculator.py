@@ -17,17 +17,26 @@ np.set_printoptions(linewidth = 200)
 from sympy import *
 # Deg-Rad transform functions
 def toDeg(x):
-	x = x/pi * 180
+	x = ((x/pi) * 180).evalf()
 	return x
+
 def toRad(x):
 	x = x/180 * pi
 	return x
 
+def toAbsDeg(x):
+	ab = abs(x)
+	deg = toDeg(arg(x))
+	print(str(ab) + '\n' + "<" + str(deg))
+
 # from mpmath import *
 # mp.dps = 15; mp.pretty = True
 
+# Symbolize English alphabet
+# e, E, I were predefined.
 a,b,c,d,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z = symbols('a b c d f g h i j k l m n o p q r s t u v w x y z A B C D F G H J K L M N O P Q R S T U V W X Y Z')
 x = symbols('x')
+
 # Commonly used Greek alphabet
 uDef_alpha = symbols('uDef_alpha')
 uDef_beta = symbols('uDef_beta')
@@ -91,12 +100,42 @@ exp(x) # same as E**x
 # Get exact value evalf()
 E.evalf()
 pi.evalf()
-# Simplify a expression
+# Simplify an expression
 simplify(expression)
-# Factoring a expression
+# Factoring an expression
 factor(expression)
-# Expand a expression
+# Expand an expression
 expand(expression)
+# Complex number operations
+# form: (a + b*I)
+re(expression)
+im(expression)
+conjugate(expression)
+abs(expression)
+arg(expression)
+# === Matrix ===
+M = Matrix([
+	[1, -1], 
+	[3, 4], 
+	[0, 2]
+	])
+# Matrix Shape
+M.shape
+# Inverse Matrix
+M**-1
+# Transpose of a Matrix
+M.T
+# Accessing Rows and Columns
+M.row(0)
+M.col(2)
+# Deleting and Inserting Rows and Columns
+M.col_del(0)
+M.row_del(1)
+M = M.row_insert(1, Matrix([[0, 4]]))
+M = M.col_insert(0, Matrix([1, -2]))
+# Matrix Constructors
+eye(3)
+# ==============
 # Sientific expression
 #2e-2 = 0.02
 #2e-3 = 0.002
@@ -107,16 +146,16 @@ expand(expression)
 # ===== To use NumPy ===== #
 import numpy as np
 # Deg-Rad transform functions
-def toDeg(x):
+def nptoDeg(x):
 	x = x/np.pi * 180
 	return x
-def toRad(x):
+def nptoRad(x):
 	x = x/180 * np.pi
 	return x
 # Display complex in abs<deg form.
-def printAbsDeg(x):
+def nptoAbsDeg(x):
 	abs = np.absolute(x)
-	deg = toDeg(np.angle(x))
+	deg = nptoDeg(np.angle(x))
 	print(str(abs) + '\n' + "<" + str(deg))
 # Pi
 np.pi
@@ -130,16 +169,16 @@ np.cos()
 .real
 # imag part  
 .imag
-# Input a complex number, returns a absolute value.
+# Input a complex number, returns an absolute value.
 np.absolute()
 # Input a complex number, returns a radians angle.
 np.angle()
 # Input a complex number, returns a degrees angle.
-toDeg(np.angle())
+nptoDeg(np.angle())
 # Display complex in abs<deg form.
-toAbsDeg()
+nptoAbsDeg()
 # Input a complex number in Euler form(input angle in degrees):
-*np.e**(toRad( )*1j)
+*np.e**(nptoRad( )*1j)
 # Solve the conjugate of a complex
 np.conjugate()
 # Power, can replace np.root() with a**(1/2)
