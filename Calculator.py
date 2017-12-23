@@ -17,17 +17,22 @@ np.set_printoptions(linewidth = 200)
 from sympy import *
 # Deg-Rad transform functions
 def toDeg(x):
-	x = ((x/pi) * 180).evalf()
+	x = (x/pi * 180).evalf()
 	return x
 
 def toRad(x):
 	x = x/180 * pi
 	return x
 
+# Display complex in abs<deg form.
 def toAbsDeg(x):
 	ab = abs(x)
 	deg = toDeg(arg(x))
 	print(str(ab) + '\n' + "<" + str(deg))
+
+# Convert abs<deg form to real+imag*I form.
+def toRealImag(ab, de):
+	return (ab*cos(toRad(de)) + ab*sin(toRad(de))*I).evalf()
 
 # from mpmath import *
 # mp.dps = 15; mp.pretty = True
@@ -107,12 +112,17 @@ factor(expression)
 # Expand an expression
 expand(expression)
 # Complex number operations
-# form: (a + b*I)
+# normal form: 
+(a + b*I)
+# polar form: 
+abs*exp_polar(I*angle)
+# operations:
 re(expression)
 im(expression)
 conjugate(expression)
 abs(expression)
 arg(expression)
+
 # === Matrix ===
 M = Matrix([
 	[1, -1], 
@@ -181,7 +191,7 @@ nptoAbsDeg()
 *np.e**(nptoRad( )*1j)
 # Solve the conjugate of a complex
 np.conjugate()
-# Power, can replace np.root() with a**(1/2)
+# Power, can replace np.root(a) with a**(1/2)
 a ** b
 
 
