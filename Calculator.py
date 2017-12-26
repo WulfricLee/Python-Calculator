@@ -94,6 +94,10 @@ uDef_Psi = symbols('uDef_Psi')
 uDef_Omega = symbols('uDef_Omega')
 uDef_Varphi = symbols('uDef_Varphi')
 
+# Display result in fractional form, use key word "tolerance=0.xxx" to specify accuracies.
+nsimplyfy(expression)
+nsimplify(0.33333, tolerance=1e-4)
+nsimplify(pi, tolerance=0.01)
 # Derivatives(differentiation)
 diff(x**3, x)
 # Integrate
