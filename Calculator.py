@@ -115,6 +115,8 @@ simplify(expression)
 factor(expression)
 # Expand an expression
 expand(expression)
+# Solve a equation(expression must equals to zero)
+solve(expression, x)
 # Complex number operations
 # normal form: 
 (a + b*I)
