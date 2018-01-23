@@ -175,13 +175,13 @@ v.normalize()
 v1.dot(v2)
 # crose product
 v1.crose(v2)
+# vector to matrix
+v.to_matrix(N)
 # ==============
 
 # Sientific expression
 #2e-2 = 0.02
 #2e-3 = 0.002
-
-
 
 ############################
 
