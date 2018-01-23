@@ -38,8 +38,9 @@ def toRealImag(ab, de):
 # mp.dps = 15; mp.pretty = True
 
 # Symbolize English alphabet
-# e, E, I were predefined.
-a,b,c,d,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z = symbols('a b c d f g h i j k l m n o p q r s t u v w x y z A B C D F G H J K L M N O P Q R S T U V W X Y Z')
+# E, I were predefined.
+a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z = \
+symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D F G H J K L M N O P Q R S T U V W X Y Z')
 x = symbols('x')
 
 # Commonly used Greek alphabet
@@ -152,9 +153,34 @@ M = M.col_insert(0, Matrix([1, -2]))
 # Matrix Constructors
 eye(3)
 # ==============
+
+# === Vector ===
+# A 3D Cartesian coordinate system can be initialized in sympy.vector as
+from sympy.vector import CoordSys3D
+N = CoordSys3D('N')
+# Once a coordinate system (in essence, a CoordSys3D instance) has been defined, we can access the orthonormal unit vectors 
+# (i.e. the i, j and k vectors) and coordinate variables/base scalars (i.e. the x, y and z variables) corresponding to it. 
+# N.i
+# N.j
+# N.k
+# are unit vectors
+# 
+# To define a vector
+v = 1 *N.i + 1 *N.j + 1 *N.k
+# length
+v.magnitude()
+# unitized
+v.normalize()
+# dot product
+v1.dot(v2)
+# crose product
+v1.crose(v2)
+# ==============
+
 # Sientific expression
 #2e-2 = 0.02
 #2e-3 = 0.002
+
 
 
 ############################
