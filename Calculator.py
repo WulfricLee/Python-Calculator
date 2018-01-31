@@ -129,6 +129,9 @@ im(expression)
 conjugate(expression)
 abs(expression)
 arg(expression)
+# Sientific expression
+#2e-2 = 0.02
+#2e-3 = 0.002
 
 # === Matrix ===
 M = Matrix([
@@ -179,9 +182,60 @@ v1.crose(v2)
 v.to_matrix(N)
 # ==============
 
-# Sientific expression
-#2e-2 = 0.02
-#2e-3 = 0.002
+# === Quaternion ===
+# 
+# Quternion multiplication function
+# q1 and q2 are two quaternions, quaternion multiplication is NOT communicative.
+def quaternion_multiplication(q1, q2):
+	return [ \
+		q1[0] * q2[0] - q1[1] * q2[1] - q1[2] * q2[2] - q1[3] * q2[3], \
+		q1[1] * q2[0] + q1[0] * q2[1] - q1[3] * q2[2] + q1[2] * q2[3], \
+		q1[2] * q2[0] + q1[3] * q2[1] + q1[0] * q2[2] - q1[1] * q2[3], \
+		q1[3] * q2[0] - q1[2] * q2[1] + q1[1] * q2[2] + q1[0] * q2[3]]
+# 
+# Get the rotation in quaternion form. Where theta is rotate angle(in radian and follows right-hand rule),
+# and axis is the rotation axis in quaternion form, this axis must be a unit vector.
+def get_rotation_in_quaternion_form(theta, axis):
+	cos_part = cos(theta/2)
+	sin_part = sin(theta/2)
+	return [cos_part, sin_part * axis[1], sin_part * axis[2], sin_part * axis[3]]
+# 
+# Vector rotation in quaternion form, returns the vector after rotation in quaternion form.
+# q stands for the rotation in quaternion form, 
+# v stands for the original vector before rotation in quaternion form.
+def get_vector_after_rotation(q, v):
+	q_conj = [q[0], -q[1], -q[2], -q[3]]
+	return quaternion_multiplication(quaternion_multiplication(q, v), q_conj)
+# 
+# phi -> x axis, theta -> y axis, psi -> z axis.
+# The Euler angles follow ZYX order.
+def eular_to_quaternion(phi, theta, psi):
+	return [ \
+	cos(phi/2) * cos(theta/2) * cos(psi/2) + sin(phi/2) * sin(theta/2) * sin(psi/2), \
+	sin(phi/2) * cos(theta/2) * cos(psi/2) - cos(phi/2) * sin(theta/2) * sin(psi/2), \
+	cos(phi/2) * sin(theta/2) * cos(psi/2) + sin(phi/2) * cos(theta/2) * sin(psi/2), \
+	cos(phi/2) * cos(theta/2) * sin(psi/2) - sin(phi/2) * sin(theta/2) * cos(psi/2)]
+# 
+def eular_to_quaternion_in_decimal(phi, theta, psi):
+	return [ \
+	(cos(phi/2) * cos(theta/2) * cos(psi/2) + sin(phi/2) * sin(theta/2) * sin(psi/2)).evalf(), \
+	(sin(phi/2) * cos(theta/2) * cos(psi/2) - cos(phi/2) * sin(theta/2) * sin(psi/2)).evalf(), \
+	(cos(phi/2) * sin(theta/2) * cos(psi/2) + sin(phi/2) * cos(theta/2) * sin(psi/2)).evalf(), \
+	(cos(phi/2) * cos(theta/2) * sin(psi/2) - sin(phi/2) * sin(theta/2) * cos(psi/2)).evalf()]
+# 
+def quaternion_to_eular(q):
+	return [ \
+	atan2(2 * (q[0] * q[1] + q[2] * q[3]), q[0]**2 - q[1]**2 - q[2]**2 + q[3]**2), \
+	asin(2 * (q[0] * q[2] - q[3] * q[1])), \
+	atan2(2 * (q[0] * q[3] + q[1] * q[2]), q[0]**2 + q[1]**2 - q[2]**2 - q[3]**2)]
+# 
+def quaternion_to_eular_in_degree(q):
+	return [ \
+	toDeg(atan2(2 * (q[0] * q[1] + q[2] * q[3]), q[0]**2 - q[1]**2 - q[2]**2 + q[3]**2)), \
+	toDeg(asin(2 * (q[0] * q[2] - q[3] * q[1]))), \
+	toDeg(atan2(2 * (q[0] * q[3] + q[1] * q[2]), q[0]**2 + q[1]**2 - q[2]**2 - q[3]**2))]
+# ==================
+
 
 ############################
 
