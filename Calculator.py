@@ -1,9 +1,5 @@
 #!/usr/bin/python
 
-# Set linewidth display 
-# https://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.set_printoptions.html
-np.set_printoptions(linewidth = 200)
-
 # # Which is used to turn ON/OFF debug
 # import pdb
 # _DEBUG = True
@@ -241,6 +237,11 @@ def quaternion_to_eular_in_degree(q):
 
 # ===== To use NumPy ===== #
 import numpy as np
+
+# Set linewidth display 
+# https://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.set_printoptions.html
+np.set_printoptions(linewidth = 200)
+
 # Deg-Rad transform functions
 def nptoDeg(x):
 	x = x/np.pi * 180
