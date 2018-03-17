@@ -1,4 +1,5 @@
 ### Initialization
+**Make sure you already have SymPy installed.**
 Open terminal, go into the root path, run python3
 ```
 python3

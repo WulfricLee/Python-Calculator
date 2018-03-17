@@ -103,6 +103,9 @@ integrate(sin(x), x)
 integrate(x**3, (x,0,1))  # the area under x^3 from x=0 to x=1
 # Exponential
 exp(x) # same as E**x
+# Logarithms
+# If base is unspecified, log() computes the natural (base e) logarithm and is equivalent to ln(). 
+log(x, base)
 # Get exact value evalf()
 E.evalf()
 pi.evalf()
