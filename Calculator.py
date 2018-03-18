@@ -34,7 +34,7 @@ def toRealImag(ab, de):
 # mp.dps = 15; mp.pretty = True
 
 # Symbolize English alphabet
-# E, I were predefined.
+## E, I were predefined.
 a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,F,G,H,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z = \
 symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D F G H J K L M N O P Q R S T U V W X Y Z')
 x = symbols('x')
@@ -95,6 +95,13 @@ uDef_Varphi = symbols('uDef_Varphi')
 nsimplyfy(expression)
 nsimplify(0.33333, tolerance=1e-4)
 nsimplify(pi, tolerance=0.01)
+# Keep result in fraction form
+Rational(numerator, denominator)
+## For example:
+## >>> 10/3
+## 3.3333333333333335
+## >>> Rational(10,3)
+## 10/3
 # Derivatives(differentiation)
 diff(x**3, x)
 # Integrate
@@ -104,7 +111,7 @@ integrate(x**3, (x,0,1))  # the area under x^3 from x=0 to x=1
 # Exponential
 exp(x) # same as E**x
 # Logarithms
-# If base is unspecified, log() computes the natural (base e) logarithm and is equivalent to ln(). 
+## If base is unspecified, log() computes the natural (base e) logarithm and is equivalent to ln(). 
 log(x, base)
 # Get exact value evalf()
 E.evalf()
@@ -129,8 +136,8 @@ conjugate(expression)
 abs(expression)
 arg(expression)
 # Sientific expression
-#2e-2 = 0.02
-#2e-3 = 0.002
+## 2e-2 = 0.02
+## 2e-3 = 0.002
 
 # === Matrix ===
 M = Matrix([
@@ -157,17 +164,17 @@ eye(3)
 # ==============
 
 # === Vector ===
-# A 3D Cartesian coordinate system can be initialized in sympy.vector as
+## A 3D Cartesian coordinate system can be initialized in sympy.vector as
 from sympy.vector import CoordSys3D
 N = CoordSys3D('N')
-# Once a coordinate system (in essence, a CoordSys3D instance) has been defined, we can access the orthonormal unit vectors 
-# (i.e. the i, j and k vectors) and coordinate variables/base scalars (i.e. the x, y and z variables) corresponding to it. 
-# N.i
-# N.j
-# N.k
-# are unit vectors
-# 
-# To define a vector
+## Once a coordinate system (in essence, a CoordSys3D instance) has been defined, we can access the orthonormal unit vectors 
+## (i.e. the i, j and k vectors) and coordinate variables/base scalars (i.e. the x, y and z variables) corresponding to it. 
+## N.i
+## N.j
+## N.k
+## are unit vectors
+## 
+## To define a vector
 v = 1 *N.i + 1 *N.j + 1 *N.k
 # length
 v.magnitude()
@@ -182,58 +189,58 @@ v.to_matrix(N)
 # ==============
 
 # === Quaternion ===
-# 
-# Quternion multiplication function
-# q1 and q2 are two quaternions, quaternion multiplication is NOT communicative.
+## 
+## Quternion multiplication function
+## q1 and q2 are two quaternions, quaternion multiplication is NOT communicative.
 def quaternion_multiplication(q1, q2):
 	return [ \
 		q1[0] * q2[0] - q1[1] * q2[1] - q1[2] * q2[2] - q1[3] * q2[3], \
 		q1[1] * q2[0] + q1[0] * q2[1] - q1[3] * q2[2] + q1[2] * q2[3], \
 		q1[2] * q2[0] + q1[3] * q2[1] + q1[0] * q2[2] - q1[1] * q2[3], \
 		q1[3] * q2[0] - q1[2] * q2[1] + q1[1] * q2[2] + q1[0] * q2[3]]
-# 
-# Get the rotation in quaternion form. Where theta is rotate angle(in radian and follows right-hand rule),
-# and axis is the rotation axis in quaternion form, this axis must be a unit vector.
+## 
+## Get the rotation in quaternion form. Where theta is rotate angle(in radian and follows right-hand rule),
+## and axis is the rotation axis in quaternion form, this axis must be a unit vector.
 def get_rotation_in_quaternion_form(theta, axis):
 	cos_part = cos(theta/2)
 	sin_part = sin(theta/2)
 	return [cos_part, sin_part * axis[1], sin_part * axis[2], sin_part * axis[3]]
-# 
-# Vector rotation in quaternion form, returns the vector after rotation in quaternion form.
-# q stands for the rotation in quaternion form, 
-# v stands for the original vector before rotation in quaternion form.
+## 
+## Vector rotation in quaternion form, returns the vector after rotation in quaternion form.
+## q stands for the rotation in quaternion form, 
+## v stands for the original vector before rotation in quaternion form.
 def get_vector_after_rotation(q, v):
 	q_conj = [q[0], -q[1], -q[2], -q[3]]
 	return quaternion_multiplication(quaternion_multiplication(q, v), q_conj)
-# 
-# phi -> x axis, theta -> y axis, psi -> z axis.
-# The Euler angles follow ZYX order.
+## 
+## phi -> x axis, theta -> y axis, psi -> z axis.
+## The Euler angles follow ZYX order.
 def eular_to_quaternion(phi, theta, psi):
 	return [ \
 	cos(phi/2) * cos(theta/2) * cos(psi/2) + sin(phi/2) * sin(theta/2) * sin(psi/2), \
 	sin(phi/2) * cos(theta/2) * cos(psi/2) - cos(phi/2) * sin(theta/2) * sin(psi/2), \
 	cos(phi/2) * sin(theta/2) * cos(psi/2) + sin(phi/2) * cos(theta/2) * sin(psi/2), \
 	cos(phi/2) * cos(theta/2) * sin(psi/2) - sin(phi/2) * sin(theta/2) * cos(psi/2)]
-# 
+## 
 def eular_to_quaternion_in_decimal(phi, theta, psi):
 	return [ \
 	(cos(phi/2) * cos(theta/2) * cos(psi/2) + sin(phi/2) * sin(theta/2) * sin(psi/2)).evalf(), \
 	(sin(phi/2) * cos(theta/2) * cos(psi/2) - cos(phi/2) * sin(theta/2) * sin(psi/2)).evalf(), \
 	(cos(phi/2) * sin(theta/2) * cos(psi/2) + sin(phi/2) * cos(theta/2) * sin(psi/2)).evalf(), \
 	(cos(phi/2) * cos(theta/2) * sin(psi/2) - sin(phi/2) * sin(theta/2) * cos(psi/2)).evalf()]
-# 
+##
 def quaternion_to_eular(q):
 	return [ \
 	atan2(2 * (q[0] * q[1] + q[2] * q[3]), q[0]**2 - q[1]**2 - q[2]**2 + q[3]**2), \
 	asin(2 * (q[0] * q[2] - q[3] * q[1])), \
 	atan2(2 * (q[0] * q[3] + q[1] * q[2]), q[0]**2 + q[1]**2 - q[2]**2 - q[3]**2)]
-# 
+## 
 def quaternion_to_eular_in_degree(q):
 	return [ \
 	toDeg(atan2(2 * (q[0] * q[1] + q[2] * q[3]), q[0]**2 - q[1]**2 - q[2]**2 + q[3]**2)), \
 	toDeg(asin(2 * (q[0] * q[2] - q[3] * q[1]))), \
 	toDeg(atan2(2 * (q[0] * q[3] + q[1] * q[2]), q[0]**2 + q[1]**2 - q[2]**2 - q[3]**2))]
-# ==================
+## ==================
 
 
 ############################
@@ -242,7 +249,7 @@ def quaternion_to_eular_in_degree(q):
 import numpy as np
 
 # Set linewidth display 
-# https://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.set_printoptions.html
+## https://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.set_printoptions.html
 np.set_printoptions(linewidth = 200)
 
 # Deg-Rad transform functions
