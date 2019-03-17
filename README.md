@@ -14,4 +14,4 @@ import PyCAS
 ```
 
 ### Usage
-Please read notations inside `Calculator.py` 
+Please read annotations inside `Calculator.py` 
