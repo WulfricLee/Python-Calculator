@@ -3,7 +3,7 @@
 
 'Please read README.md'
 
-__author__ = 'Glenn Pallad'
+__author__ = 'Wulfric Lee'
 
 # This is used to turn ON/OFF debug
 # import pdb

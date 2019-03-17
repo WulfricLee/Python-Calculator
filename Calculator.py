@@ -296,5 +296,3 @@ a ** b
 # file = open("out.txt", "w")
 # file.write(str())
 # file.close()
-
-
