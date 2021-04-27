@@ -182,8 +182,8 @@ v.magnitude()
 v.normalize()
 # dot product
 v1.dot(v2)
-# crose product
-v1.crose(v2)
+# cross product
+v1.cross(v2)
 # vector to matrix
 v.to_matrix(N)
 # ==============
